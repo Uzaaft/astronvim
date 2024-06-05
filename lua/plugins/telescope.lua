@@ -12,6 +12,16 @@ return {
             hidden = vim.tbl_get((vim.uv or vim.loop).fs_stat ".git" or {}, "type") == "directory",
           }
         end
+        maps.n["<Leader>fN"] = {
+          function()
+            require("telescope.builtin").find_files {
+              prompt_title = "Nix Files",
+              cwd = vim.fn.getenv "config_dirs" .. "nix-darwin",
+              follow = true,
+            }
+          end,
+          desc = "Find Nix config files",
+        }
       end,
     },
   },
